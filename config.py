@@ -14,7 +14,7 @@ text_mode = args.text_mode
 
 # Load settings from the config file (default to slouchy.ini)
 if args.config_file:
-  config_file = ConfigObj(args.config_file) 
+  config_file = ConfigObj(args.config_file)
 else:
   config_file = ConfigObj('slouchy.ini')
 
@@ -35,7 +35,6 @@ for i in ['distance_reference', 'thoracolumbar_tolerance',\
 globals()['poll_rate'] = int(globals()['poll_rate'])
 
 # video_device can be either an int or str, so try int but fall back on str
-video_device = globals()['video_device']
 try:
   video_device = int(video_device)
 except ValueError:
