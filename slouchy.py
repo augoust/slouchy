@@ -300,12 +300,15 @@ def slouching_results():
   return maybe_slouching
 
 def main():
-  # TODO: This function is ugly and very hacky. Fix it! >:c
+  # TODO: This function is too hacky. Fix it! >:c
   if config.text_mode:
-    while True:
-      slouching_results()
-      if config.poll_rate < 1: break
-      time.sleep(config.poll_rate)
+    try:
+      while True:
+        slouching_results()
+        if config.poll_rate < 1: break
+        time.sleep(config.poll_rate)
+    except KeyboardInterrupt:
+      sys.exit(0)
 
   else: # Default to GUI mode
     from gui import TrayIcon, WrapperWidget
