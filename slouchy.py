@@ -88,6 +88,7 @@ def determine_distance(MaybeFace):
     return MaybeFace
 
   if config.text_mode:
+    print
     print('Face detected')
     print('-------------')
     print('    Position:   x = {:d}, y = {:d}'.format(x, y))
@@ -159,6 +160,7 @@ def determine_posture(MaybeImage):
     x, y, w, h = maybe_face.result   # Unpack the face coordinates
     face_image = image[y:y+h, x:x+w] # Crop the image. Eyes are only on faces
   else:
+    if config.text_mode: print('\nNo face detected')
     return Maybe(False, 'No face detected.')
 
   maybe_distance = determine_distance(maybe_face) #Get face-camera distance
