@@ -24,7 +24,8 @@ args = vars(args)
 # Overide config file settings per the command line
 for key, val in args.iteritems():
   if key in config_file['MAIN'].keys():
-    globals()[key] = args[key] if args[key] else config_file['MAIN'][key]
+    globals()[key] = args[key] if args[key] != None\
+            else config_file['MAIN'][key]
 
 # Some settings need to be floats (not strings)
 for i in ['distance_reference', 'thoracolumbar_tolerance',\
