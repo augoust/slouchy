@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import time, sys
 import cv2
-import time
 import config
 
 from collections import namedtuple
 from math        import atan, sqrt
+
+from PyQt4 import QtGui
 
 """
 Slouchy uses your webcam to determine if you are slouching and alerts you when
@@ -296,5 +298,24 @@ def slouching_results():
 
   return maybe_slouching
 
+def main():
+  # TODO: This function is ugly and very hacky. Fix it! >:c
+  if config.text_mode:
+    while True:
+      slouching_results()
+      if config.poll_rate < 1: break
+      time.sleep(config.poll_rate)
+
+  else: # Default to GUI mode
+    from gui import TrayIcon, WrapperWidget
+    app = QtGui.QApplication(sys.argv)
+
+    w = WrapperWidget()
+    tray = TrayIcon(QtGui.QIcon('slouchy_icon.png'), w)
+    tray.show()
+    tray.alert()
+    sys.exit(app.exec_())
+
 if __name__ == '__main__':
-  slouching_results()
+#  slouching_results()
+  main()
